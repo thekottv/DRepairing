@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33502.453
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DRepairing", "DRepairing.csproj", "{A0C02907-09F8-47D8-9ACC-F53BB660FBD5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A0C02907-09F8-47D8-9ACC-F53BB660FBD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0C02907-09F8-47D8-9ACC-F53BB660FBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0C02907-09F8-47D8-9ACC-F53BB660FBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0C02907-09F8-47D8-9ACC-F53BB660FBD5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {79E6F41B-60EA-4457-8A06-BD700F965C3D}
+	EndGlobalSection
+EndGlobal

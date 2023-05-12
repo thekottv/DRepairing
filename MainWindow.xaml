@@ -1,0 +1,34 @@
+﻿<Window x:Class="DRepairing.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DRepairing"
+        mc:Ignorable="d"
+        Height="360" Width="473"
+        WindowStartupLocation="CenterScreen"
+        Icon="assets\icons\icon.ico"
+        ResizeMode="CanMinimize"
+        BorderBrush="#222"
+        Title="Device Repairing: Вход в ИС">
+    <Grid x:Name="LoginGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Button IsDefault="True" x:Name="LoginButton" Content="Войти" HorizontalAlignment="Center" VerticalAlignment="Top" Width="134" Height="33" Click="Login_button" Grid.Row="3" Grid.Column="1" Margin="0,10,0,0"/>
+        <TextBox x:Name="TextBoxLogin" TextWrapping="Wrap" Text="" Width="216" Height="34" VerticalContentAlignment="Center" Grid.Row="1" Grid.Column="1" Margin="1,2,1,1"/>
+        <TextBox x:Name="TextBoxPassword" TextWrapping="Wrap" Text="" Width="216" Height="34" VerticalContentAlignment="Center" Grid.Row="2" Grid.Column="1"/>
+        <Image HorizontalAlignment="Center" VerticalAlignment="Center" Height="102" Width="216" Source="\assets\imgs\Device  Repairing.png" Grid.Column="1"/>
+        <Label Content="Логин " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Height="30" Width="52" Margin="1,2,0,1"/>
+        <Label Content="Пароль " HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="2" Height="30" Width="61"/>
+
+    </Grid>
+</Window>
