@@ -36,7 +36,8 @@ namespace DRepairing
 
         private void Login_button(object sender, RoutedEventArgs e)
         {
-            var CurrentUser = AppData.db.Users.FirstOrDefault(u => u.Login == TextBoxLogin.Text && u.Password == TextBoxPassword.Text); //Разграничение с проверкой логина и пароля
+            string pword = MD5Gen.MD5Hash(TextBoxPassword.Text);
+            var CurrentUser = AppData.db.Users.FirstOrDefault(u => u.Login == TextBoxLogin.Text && u.Password == pword); //Разграничение с проверкой логина и пароля
             if (CurrentUser != null)
             {
                 Globals.UserRole = CurrentUser.RoleID;
@@ -46,7 +47,7 @@ namespace DRepairing
                 TextBoxPassword.IsEnabled = false;
 
                 MainW window0 = new MainW();
-                window0.CurrentUserMSG.Text = $"Текущий пользователь: {CurrentUser.FirstName} ({TextBoxLogin.Text}) "; //велком такой-то челик переменная
+                window0.CurrentUserMSG.Text += $"{Globals.UserName} ({Globals.userinfo.Role.Role1})"; //велком такой-то челик переменная
                 window0.Show();
                 Close();
             }

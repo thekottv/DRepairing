@@ -27,7 +27,7 @@
             </Grid.ColumnDefinitions>
 
             <ScrollViewer x:Name="CUMSG_SW" Grid.Column="1" VerticalScrollBarVisibility="Auto">
-                <TextBlock x:Name="CurrentUserMSG" Text="Текущий пользователь: Александр (admin) " TextAlignment="Right" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#888"/>
+                <TextBlock x:Name="CurrentUserMSG" Text="Текущий пользователь: " TextAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#888"/>
                 <!-- Этой шляпе нужен автоскроллинг-->
             </ScrollViewer>
             <Button Width="170" Height="30" Content="Сменить пользователя" VerticalAlignment="Center" Grid.Column="2" Click="ChangeUser"/>
@@ -45,33 +45,57 @@
                             <RowDefinition Height="45"/>
                         </Grid.RowDefinitions>
 
-                        <DataGrid x:Name="DGridRequests" Grid.Row="0">
+                        <DataGrid x:Name="DGridRequests" Grid.Row="0" SelectionMode="Single" SelectionChanged="DGridRequests_SelectionChanged">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="№" Width="15" Binding="{Binding ID}"/>
                                 <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding C_LastName}"/>
                                 <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding C_PhoneNumber}"/>
                                 <DataGridTextColumn Header="Дата" Width="*" Binding="{Binding DateOfRequest}"/>
-                                <DataGridTextColumn Header="Статус" Width="*" Binding="{Binding IsAccepted}"/>
+                                <DataGridTextColumn Header="Статус" Width="50" Binding="{Binding IsAccepted}"/>
                                 <DataGridTextColumn Header="Состояние" Width="*" Binding="{Binding State.RequestState}"/>
                                 <DataGridTextColumn Header="Устройство" Width="*" Binding="{Binding Device.Model}"/>
+                                <DataGridTextColumn Header="Сумма ремонта" Width="*" Binding="{Binding RepairCost}"/>
                                 <DataGridTemplateColumn Width="auto">
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Button Click="More_Click" Content="Подробнее" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" FontSize="5" Background="#CCCC22" Foreground="#222"/>
+                                            <Button Click="More_Click" Content="Подробнее" VerticalAlignment="Center" VerticalContentAlignment="Center" Height="25" FontSize="5" Background="#BBBB22" Foreground="#222"/>
+                                            <!--Click="More_Click"-->
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
                                 </DataGridTemplateColumn>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Новая заявка" HorizontalAlignment="Left" Margin="5" Grid.Row="1" VerticalAlignment="Center"/>
-                        <Button Content="Изменить" HorizontalAlignment="Left" Margin="110,5,5,5" Grid.Row="1" VerticalAlignment="Center"/>
-                        <Button Content="Удалить" HorizontalAlignment="Left" Margin="190,5,5,5" Grid.Row="1" VerticalAlignment="Center"/>
+                        <Button x:Name="BTN_New" Click="NewReqButton" Content="Новая заявка" HorizontalAlignment="Left" Margin="5" Grid.Row="1" VerticalAlignment="Center"/>
+                        <Button x:Name="BTN_Edit" Click="EditReqButton" Content="Изменить" HorizontalAlignment="Left" Margin="110,0,0,9" Grid.Row="1" VerticalAlignment="Bottom"/>
+                        <Button x:Name="BTN_Remove" Click="RemoveReqButton" Content="Удалить" HorizontalAlignment="Left" Margin="190,5,5,5" Grid.Row="1" VerticalAlignment="Center"/>
+                        <Button x:Name="BTN_Report" Click="NewRepornButton" Content="Сформировать отчет" HorizontalAlignment="Left" Margin="258,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
 
                     </Grid>
                 </TabItem>
-                <TabItem Header="Пользователи" Grid.Column="1" Visibility="Visible">
+                <TabItem x:Name="UsersTab" Header="Пользователи" Grid.Column="1" Visibility="Visible">
                     <!--Users TAB-->
-                    <Grid/>
+                    <Grid Background="#333">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10*"/>
+                            <RowDefinition Height="45"/>
+                        </Grid.RowDefinitions>
+
+                        <DataGrid x:Name="DGridUsers" Grid.Row="0" SelectionMode="Single" SelectionChanged="DGridUsers_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Width="15" Binding="{Binding ID}"/>
+                                <DataGridTextColumn Header="Фамилия" Width="*" Binding="{Binding LastName}"/>
+                                <DataGridTextColumn Header="Имя" Width="*" Binding="{Binding FirstName}"/>
+                                <DataGridTextColumn Header="Отчество" Width="*" Binding="{Binding SecondName}"/>
+                                <DataGridTextColumn Header="Телефон" Width="*" Binding="{Binding MobileNumber}"/>
+                                <DataGridTextColumn Header="Логин" Width="*" Binding="{Binding Login}"/>
+                                <DataGridTextColumn Header="Роль" Width="*" Binding="{Binding Role.Role1}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button x:Name="BTN_NewUser" Click="NewUserButton" Content="Новый пользователь" HorizontalAlignment="Left" Margin="5" Grid.Row="1" VerticalAlignment="Center"/>
+                        <Button x:Name="BTN_EditUser" Click="EditUserButton" Content="Изменить" HorizontalAlignment="Left" Margin="161,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+                        <Button x:Name="BTN_RemoveUser" Click="RemoveUserButton" Content="Удалить" HorizontalAlignment="Left" Margin="241,0,0,0" Grid.Row="1" VerticalAlignment="Center"/>
+
+                    </Grid>
                 </TabItem>
             </TabControl>
         </Grid>

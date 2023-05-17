@@ -5,8 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DRepairing"
         mc:Ignorable="d"
-        Title="NewRequest" Height="450" Width="800">
+        ResizeMode="CanMinimize"
+        Title="Создание заявки на ремонт"
+        Height="450" Width="820">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Style.Setters>
+                <Setter Property="Background" Value="#ccc"/>
+                <Setter Property="Foreground" Value="#222"/>
+                <Setter Property="Cursor" Value="IBeam"/>
+                <Setter Property="SelectionBrush" Value="#FFECE30F"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="Effect">
+                    <Setter.Value>
+                        <DropShadowEffect Color="#888" Direction="0" ShadowDepth="0" BlurRadius="10"/>
+                    </Setter.Value>
+                </Setter>
+            </Style.Setters>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="Name" Value="TBX_C_Lastname"/>
+                        <Condition Property="VerticalScrollBarVisibility" Value="Hidden"/>
+                    </MultiTrigger.Conditions>
+                    <MultiTrigger.Setters>
+                        <Setter Property="Effect">
+                            <Setter.Value>
+                                <DropShadowEffect Color="#FFC83B3B" Direction="0" ShadowDepth="0" BlurRadius="10"/>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="BorderBrush" Value="#FFC83B3B"/>
+                    </MultiTrigger.Setters>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+
     <Grid>
-        
+        <Label Content="Новая заявка" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TBX_C_Lastname" TextChanged="TBX_C_Lastname_TextChanged" VerticalScrollBarVisibility="Disabled" PreviewTextInput="TBX_LettersOnly" TextWrapping="Wrap" Text="{Binding C_LastName}" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,75,0,0"/>
+        <TextBox x:Name="TBX_C_Firstname" PreviewTextInput="TBX_LettersOnly" TextWrapping="Wrap" Text="{Binding C_FirstName}" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,139,0,0"/>
+        <TextBox x:Name="TBX_C_Secondname" PreviewTextInput="TBX_LettersOnly" TextWrapping="Wrap" Text="{Binding C_SecondName}" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,208,0,0"/>
+        <Label Content="Фамилия" HorizontalAlignment="Left" Margin="20,79,0,0" VerticalAlignment="Top"/>
+        <Label Content="Имя" HorizontalAlignment="Left" Margin="53,141,0,0" VerticalAlignment="Top"/>
+        <Label Content="Отчество" HorizontalAlignment="Left" Margin="18,210,0,0" VerticalAlignment="Top"/>
+        <TextBlock x:Name="C_LN_Required" Visibility="Hidden" HorizontalAlignment="Left" Margin="104,114,0,0" TextWrapping="Wrap" Text="Поле обязательно для заполнения" VerticalAlignment="Top" FontSize="12" FontWeight="Medium" Foreground="Red" Width="216"/>
+        <TextBox x:Name="TBX_C_Phone" TextWrapping="Wrap" Text="{Binding C_PhoneNumber}" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,275,0,0"/>
+        <Label Content="Телефон" HorizontalAlignment="Left" Margin="22,275,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="TBX_D_Manifucator" TextWrapping="Wrap" Text="{Binding Device.Manifucator}" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,75,104,0"/>
+        <TextBox x:Name="TBX_D_Model" TextWrapping="Wrap" Text="{Binding Device.Model}" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,139,104,0"/>
+        <RichTextBox x:Name="TBX_D_Malfunction" Width="216" Height="101" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,208,104,0" Background="#FFCCCCCC" Foreground="#222" VerticalScrollBarVisibility="Auto">
+            <RichTextBox.Effect>
+                <DropShadowEffect Color="#888" Direction="0" ShadowDepth="0" BlurRadius="10"/>
+            </RichTextBox.Effect>
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding Device.MalfunctionInfo}"/>
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+        <Label Content="Название" HorizontalAlignment="Right" Margin="0,77,335,0" VerticalAlignment="Top"/>
+        <Label Content="Модель" HorizontalAlignment="Right" Margin="0,141,335,0" VerticalAlignment="Top"/>
+        <Label Content="Информация о &#xD;&#xA;           поломке" HorizontalAlignment="Right" Margin="0,208,335,0" VerticalAlignment="Top" Width="116" Height="62"/>
+        <Label Content="Информация о клиенте" HorizontalAlignment="Left" Margin="126,40,0,0" VerticalAlignment="Top" Foreground="#FFB7B7B7"/>
+        <Label Content="Информация об устройстве" HorizontalAlignment="Right" Margin="0,34,111,0" VerticalAlignment="Top"/>
+        <CheckBox Content="Заявка рассмотрена и принята" HorizontalAlignment="Left" Margin="489,344,0,0" VerticalAlignment="Top" IsChecked="{Binding IsAccepted}" BorderThickness="2"/>
+        <TextBox x:Name="TXB_RepairCost" PreviewTextInput="TXB_RepairCost_PreviewTextInput" TextWrapping="Wrap" Text="{Binding RepairCost}" Width="108" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="137,370,0,0"/>
+        <Label Content="Стоимость ремонта" HorizontalAlignment="Left" Margin="119,342,0,0" VerticalAlignment="Top"/>
+        <Label Content="Рублей" HorizontalAlignment="Left" Margin="250,372,0,0" VerticalAlignment="Top"/>
+        <Button Content="Готово" HorizontalAlignment="Left" Margin="506,378,0,0" VerticalAlignment="Top" Width="92" Click="Request_Add"/>
+        <Button Content="Отменить" HorizontalAlignment="Left" Margin="617,378,0,0" VerticalAlignment="Top" Width="92" Click="Request_Cancel"/>
+        <ComboBox x:Name="CBX_Status"  HorizontalAlignment="Left" VerticalAlignment="Top" Width="108" Height="34" Margin="353,370,0,0" DisplayMemberPath="RequestState">
+            <ComboBox.Effect>
+                <DropShadowEffect Color="#888" Direction="0" ShadowDepth="0" BlurRadius="10"/>
+            </ComboBox.Effect>
+        </ComboBox>
+        <Label Content="Статус" HorizontalAlignment="Left" HorizontalContentAlignment="Center" Margin="353,342,0,0" VerticalAlignment="Top" Width="108"/>
     </Grid>
 </Window>
