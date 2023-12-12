@@ -36,7 +36,7 @@ namespace DRepairing
             string status = (selectedReq.IsAccepted == true) ? "Принято": "Отказано";
             //Присваивание без контекста из-за того, что лейблы являются заголовками, и забиндить контент не выйдет
             LB_Title.Content = $"{LB_Title.Content} №{selectedReq.ID}";
-            LB_FIO.Content = $"{LB_FIO.Content} {selectedReq.C_LastName}";
+            LB_FIO.Content = $"{LB_FIO.Content} {selectedReq.C_LastName} {selectedReq.C_FirstName} {selectedReq.C_SecondName}";
             LB_Phone.Content = $"{LB_Phone.Content} {selectedReq.C_PhoneNumber}";
             LB_Date.Content = $"{LB_Date.Content} {selectedReq.DateOfRequest}";
             LB_Status.Content = $"{LB_Status.Content} {status}";

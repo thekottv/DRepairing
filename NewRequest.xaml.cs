@@ -33,6 +33,7 @@ namespace DRepairing
             if (selectedReq != null)
             {
                 _currentreq = selectedReq;
+                _ddd = selectedReq.Device;
                 CBX_Status.SelectedIndex = _currentreq.State.ID - 1;
             }
             else

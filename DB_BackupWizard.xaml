@@ -1,0 +1,25 @@
+﻿<Window xmlns:syncfusion="http://schemas.syncfusion.com/wpf"  x:Class="DRepairing.DB_BackupWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DRepairing"
+        mc:Ignorable="d"
+        Title="Резервное копирование и восстановление базы данных" Height="350" Width="800">
+    <Grid>
+        <Button x:Name="BTN_Done" Content="Готово" HorizontalAlignment="Center" Margin="0,283,0,0" VerticalAlignment="Top" Width="92" Click="BC_Done"/>
+        <Label Content="" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Создать резервную копию" HorizontalAlignment="Left" Margin="115,40,0,0" VerticalAlignment="Top" Foreground="#FFB7B7B7"/>
+        <Label Content="Восстановить из резервной копии" HorizontalAlignment="Right" Margin="0,40,78,0" VerticalAlignment="Top"/>
+        <Label Content="Путь" HorizontalAlignment="Left" Margin="57,91,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="BTN_Restore_Path" Content="...   " HorizontalContentAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="33" Click="BTN_Restore_Path_Click" Margin="608,89,0,0"/>
+        <TextBox x:Name="TBX_Restore" VerticalScrollBarVisibility="Disabled" TextChanged="TBX_Restore_TextChanged" TextWrapping="NoWrap" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="490,89,0,0"/>
+        <Button x:Name="BTN_Create_Path" Content="...   " HorizontalContentAlignment="Right" HorizontalAlignment="Left" VerticalAlignment="Top" Width="134" Height="33" Click="BTN_Create_Path_Click" Margin="225,89,0,0"/>
+        <TextBox x:Name="TBX_Backup" VerticalScrollBarVisibility="Disabled" TextChanged="TBX_Backup_TextChanged" TextWrapping="NoWrap" Width="216" Height="34" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="104,89,0,0"/>
+        <Label Content="Путь" HorizontalAlignment="Left" Margin="57,91,0,0" VerticalAlignment="Top"/>
+        <Label Content="Путь" HorizontalAlignment="Left" Margin="443,91,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="BTN_DoRestore" Content="Восстановление" HorizontalAlignment="Left" Margin="443,159,0,0" VerticalAlignment="Top" Width="299" Click="BTN_DoRestore_Click"/>
+        <Button x:Name="BTN_DoBackup" Content="Резервное копирование" HorizontalAlignment="Left" Margin="57,159,0,0" VerticalAlignment="Top" Width="302" Click="BTN_DoBackup_Click"/>
+
+    </Grid>
+</Window>

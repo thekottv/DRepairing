@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DRepairing"
         mc:Ignorable="d"
-        Title="Заявка №228 от 22.02.2222 (Google Pixel 4)" Height="600" Width="800">
+        Title="Заявка" Height="600" Width="800">
     <Grid IsMouseDirectlyOverChanged="Grid_IsMouseDirectlyOverChanged">
         <Label x:Name="LB_Title" Content="Информация о заявке" HorizontalAlignment="Center" Margin="0,19,0,0" VerticalAlignment="Top"/>
         <Label x:Name="LB_FIO" Content="ФИО заявителя:" HorizontalAlignment="Left" Margin="57,69,0,0" VerticalAlignment="Top"/>
