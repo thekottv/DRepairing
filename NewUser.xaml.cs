@@ -44,12 +44,6 @@ namespace DRepairing
         private void User_Add(object sender, RoutedEventArgs e)
         {
             string pWord = _currentUser.Password;
-            bool pwordIsNotEmpty = (TBX_PWord.Text != "");
-            bool NewUserAndNewPWord = (IsNewUser == true && pwordIsNotEmpty == true);
-            bool NewUserAndEmptyPWord = (IsNewUser == true && pwordIsNotEmpty == false);
-            bool OldUserAndNewPWord = (IsNewUser == false && pwordIsNotEmpty == true);
-            bool OldUserAndEmptyPWord = (IsNewUser == false && pwordIsNotEmpty == false);
-            //bool   NoPWordRestriction = (NewUserAndNewPWord                        | OldUserAndNewPWord                         | OldUserAndEmptyPWord                      );
             bool NoPWordRestriction = ((IsNewUser == true && TBX_PWord.Text != "") | (IsNewUser == false && TBX_PWord.Text != "") | (IsNewUser == false && TBX_PWord.Text == "") ); //Исключает создание пользователя с пустым паролем
             if (TBX_Lastname.Text != "" && NoPWordRestriction)
             {

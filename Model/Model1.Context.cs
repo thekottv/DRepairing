@@ -12,7 +12,7 @@ namespace DRepairing.Model
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class DeviceRepairingEntities : DbContext
     {
         public static DeviceRepairingEntities _context;
@@ -27,12 +27,12 @@ namespace DRepairing.Model
             : base("name=DeviceRepairingEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
+    
         public virtual DbSet<Device> Device { get; set; }
         public virtual DbSet<Request> Request { get; set; }
         public virtual DbSet<Role> Role { get; set; }

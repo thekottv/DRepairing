@@ -5,7 +5,6 @@
              StartupUri="MainWindow.xaml"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Application.Resources>
-        
         <Style TargetType="Grid">
             <Setter Property="Background" Value="#222"/>
         </Style>

@@ -1,4 +1,6 @@
 ﻿using DRepairing.Model;
+using Microsoft.SqlServer.Management.Common;
+using Microsoft.SqlServer.Management.Smo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Word = Microsoft.Office.Interop.Word;
+
+using System.Data.SqlClient;
 
 namespace DRepairing
 {
@@ -39,6 +43,9 @@ namespace DRepairing
                     {
                         UsersTab.Visibility = Visibility.Hidden;
                         BTN_Report.Visibility = Visibility.Hidden;
+                        BTN_Backup.Visibility = Visibility.Hidden;
+
+                        //TODO Если айдишники у ролей в бд будут отличаться от кейсов, роли будут работать неправильно. Видимо, потому что он сравнивает именно их вместо наименований
                         break;
                     }
                 case 3: //Engineer
@@ -48,6 +55,7 @@ namespace DRepairing
                         BTN_Edit.Visibility = Visibility.Hidden;
                         BTN_Remove.Visibility = Visibility.Hidden;
                         BTN_Report.Visibility = Visibility.Hidden;
+                        BTN_Backup.Visibility = Visibility.Hidden;
                         break;
                     }
                 case 4: //Warehouseman
@@ -57,6 +65,7 @@ namespace DRepairing
                         BTN_Edit.Visibility = Visibility.Hidden;
                         BTN_Remove.Visibility = Visibility.Hidden;
                         BTN_Report.Visibility = Visibility.Hidden;
+                        BTN_Backup.Visibility = Visibility.Hidden;
                         break;
                     }
             }
@@ -74,7 +83,8 @@ namespace DRepairing
         {
             NewRequest newRequest = new NewRequest(null);
             newRequest.ShowDialog();
-            DGridRequests.ItemsSource = AppData.db.Request.ToList();
+            //DGridRequests.ItemsSource = AppData.db.Request.ToList();
+            DGridRequests.ItemsSource = DeviceRepairingEntities.GetContext().Request.ToList();
             DGridRequests.Items.Refresh();
         }
 
@@ -85,7 +95,7 @@ namespace DRepairing
             newRequest.ShowDialog();
 
             DGridRequests.Items.Refresh();
-            //баг - при добавлении или удалении записи рефреш перестаёт работать. Удаление такого необновленного элемента, офк, вызывает ошибку
+            //баг - при добавлении или удалении записи рефреш перестаёт работать. Удаление такого необновленного элемента, офк, вызывает ошибку (fixed)
         }
         private void RemoveReqButton(object sender, RoutedEventArgs e)
         {
@@ -97,16 +107,19 @@ namespace DRepairing
                     DeviceRepairingEntities.GetContext().Request.Remove(DGridRequests.SelectedItem as Request);
                     DeviceRepairingEntities.GetContext().SaveChanges();
 
-                    DGridRequests.ItemsSource = AppData.db.Request.ToList();
+                    //DGridRequests.ItemsSource = AppData.db.Request.ToList(); - метод хуйня и кидает ошибку при попытке удалить запись после её создания. хуево обновляет окно
+                    DGridRequests.ItemsSource = DeviceRepairingEntities.GetContext().Request.ToList();
                     DGridRequests.Items.Refresh();
+
                     MessageBox.Show("Удаление завершено");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Что то пошло не так...\nОкно будет перезагружено\n\n{ex}");
-                    MainW Mainw = new MainW();
-                    Mainw.Show();
-                    this.Close();
+                    //MainW Mainw = new MainW();
+                    //Mainw.Show();
+                    //this.Close();
+                    MainW_Reload();
                 }
                 //баг - если селекшн не дай бог загорится белым - селектнутый элемент больше нельзя будет удалить до следующего добавления или удаления другого элемента
             }
@@ -229,7 +242,8 @@ namespace DRepairing
         {
             NewUser NewUser = new NewUser(null);
             NewUser.ShowDialog();
-            DGridUsers.ItemsSource = AppData.db.Users.ToList();
+            //DGridUsers.ItemsSource = AppData.db.Users.ToList();
+            DGridUsers.ItemsSource = DeviceRepairingEntities.GetContext().Users.ToList();
             DGridUsers.Items.Refresh();
         }
 
@@ -252,20 +266,37 @@ namespace DRepairing
                     DeviceRepairingEntities.GetContext().Users.Remove(DGridUsers.SelectedItem as Users);
                     DeviceRepairingEntities.GetContext().SaveChanges();
 
-                    DGridUsers.ItemsSource = AppData.db.Users.ToList();
+                    //DGridUsers.ItemsSource = AppData.db.Users.ToList();
+                    DGridUsers.ItemsSource = DeviceRepairingEntities.GetContext().Users.ToList();
                     DGridUsers.Items.Refresh();
                     MessageBox.Show("Удаление завершено");
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show($"Что то пошло не так...\nОкно будет перезагружено\n\n{ex}");
-                    MainW Mainw = new MainW(); //Переоткрывает окно после ошибки для её устранения
-                    Mainw.Show();
-                    this.Close();
+                    MainW_Reload();
 
                 }
                 //баг - если селекшн не дай бог загорится белым - селектнутый элемент больше нельзя будет удалить до следующего добавления или удаления другого элемента
             }
+        }
+
+        private void MainW_Reload()  //Переоткрывает окно после появления ошибки. Это может помочь её устранить.
+        {
+            MainW Mainw = new MainW();
+            Mainw.Show();
+            this.Close();
+        }
+
+        private void BackupButton(object sender, RoutedEventArgs e)
+        {
+            DB_BackupWizard Db_BackupWizard = new DB_BackupWizard();
+            Db_BackupWizard.ShowDialog();
+
+            DGridUsers.ItemsSource = DeviceRepairingEntities.GetContext().Users.ToList();
+            DGridUsers.Items.Refresh();
+            DGridRequests.ItemsSource = DeviceRepairingEntities.GetContext().Request.ToList();
+            DGridRequests.Items.Refresh();
         }
     }
 }
